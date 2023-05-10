@@ -1,0 +1,37 @@
+name: Update Workflow
+
+# This workflow is not really used, but it's a placeholder to trigger
+# Renovate updates for this repository, this way we easier can update
+# action.yml with new versions of the actions we depend on.
+
+on:
+  repository_dispatch:
+    types: [update-workflow]
+
+jobs:
+  test-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get version from git tag 🏷️
+        id: version
+        uses: jannemattila/get-version-from-tag@v1
+
+      - name: Set version to release tag 📝
+        shell: bash
+        run:
+          yarn version --no-commit-hooks --no-git-tag-version --new-version ${{
+          steps.version.outputs.version }}
+
+      - name: Publish 🚀
+        shell: bash
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ inputs.npm-auth-token }}
+
+      - name: Push version changes to main branch 📤
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: release ${{ github.event.release.tag_name }}"
+          branch: ${{ github.event.repository.default_branch }}
+          file_pattern: package.json
