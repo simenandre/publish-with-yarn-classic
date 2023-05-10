@@ -31,7 +31,7 @@ jobs:
       - name: Build 🔨
         run: yarn build
 
-      - use: simenandre/publish-with-yarn-classic@v1
+      - uses: simenandre/publish-with-yarn-classic@v1
         with:
           npm-auth-token: ${{ secrets.NPM_TOKEN }}
 ```
