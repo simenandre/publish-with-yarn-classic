@@ -35,3 +35,8 @@ jobs:
         with:
           npm-auth-token: ${{ secrets.NPM_TOKEN }}
 ```
+
+## Other actions
+
+- [simenandre/publish-with-yarn](https://github.com/simenandre/publish-with-yarn)
+- [simenandre/publish-with-pnpm](https://github.com/simenandre/publish-with-pnpm)
