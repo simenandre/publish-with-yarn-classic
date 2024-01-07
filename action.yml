@@ -14,7 +14,7 @@ runs:
   steps:
     - name: Get version from git tag 🏷️
       id: version
-      uses: jannemattila/get-version-from-tag@v1
+      uses: jannemattila/get-version-from-tag@v3
 
     - name: Set version to release tag 📝
       shell: bash
